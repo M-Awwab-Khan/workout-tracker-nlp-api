@@ -9,6 +9,7 @@ GENDER = 'm'
 WEIGHT_KG = 50
 HEIGHT_CM = 180
 AGE = 17
+SHEETY_AUTH_TOKEN = 'Bearer askeio5u1093jfksajr02934qtqea'
 
 
 headers = {
@@ -43,6 +44,8 @@ for exercise in exercise_data:
             "calories": calories
         }
     }
-    response = requests.post(url=SHEETY_ENDPOINT, json=data)
-    print(response.json())
+    headers = {
+        "Authorization": SHEETY_AUTH_TOKEN
+    }
+    response = requests.post(url=SHEETY_ENDPOINT, json=data, headers=headers)
 
