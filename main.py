@@ -1,4 +1,5 @@
 import requests
+import datetime as dt
 API_KEY = 'dec357edc5b3bbc7985cbb7c1ee9fa32'
 APP_ID = 'dc9070c6'
 NLPEX_ENDPOINT = 'https://trackapi.nutritionix.com/v2/natural/exercise'
@@ -16,5 +17,24 @@ params = {
 } 
 
 response = requests.post(url=NLPEX_ENDPOINT, json=params, headers=headers)
-exercise_data = response.json()
+exercise_data = response.json()['exercises']
+date_str = dt.datetime.now().strftime('%d/%m/%Y')
+time_str = dt.datetime.now().strftime('%X')
+
+for exercise in exercise_data:
+    name = exercise['name'].title()
+    duration = exercise['duration_min']
+    calories = exercise['nf_calories']
+    data = {
+        'workout': {
+            "date": date_str,
+            "time": time_str,
+            "exercise": name,
+            "duration": duration,
+            "calories": calories
+        }
+    }
+    print(data)
+    response = requests.post(url=SHEETY_ENDPOINT, json=data)
+    print(response.json())
 
