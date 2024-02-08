@@ -5,6 +5,11 @@ APP_ID = 'dc9070c6'
 NLPEX_ENDPOINT = 'https://trackapi.nutritionix.com/v2/natural/exercise'
 SHEETY_SECRET = '529ce7c9efde4081a07dcb7b5b9da419'
 SHEETY_ENDPOINT = f'https://api.sheety.co/{SHEETY_SECRET}/workoutTracking/workouts'
+GENDER = 'm'
+WEIGHT_KG = 50
+HEIGHT_CM = 180
+AGE = 17
+
 
 headers = {
     'Content-Type': 'application/json',
@@ -13,7 +18,11 @@ headers = {
 }
 
 params = {
-    "query": input("How much did you workout today? ")
+    "query": input("How much did you workout today? "),
+    "gender": GENDER,
+    "weight_kg": WEIGHT_KG,
+    "height_cm": HEIGHT_CM,
+    "age": AGE
 } 
 
 response = requests.post(url=NLPEX_ENDPOINT, json=params, headers=headers)
@@ -34,7 +43,6 @@ for exercise in exercise_data:
             "calories": calories
         }
     }
-    print(data)
     response = requests.post(url=SHEETY_ENDPOINT, json=data)
     print(response.json())
 
