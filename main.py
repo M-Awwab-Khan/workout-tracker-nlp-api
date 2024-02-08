@@ -1,15 +1,16 @@
 import requests
+import os
 import datetime as dt
-API_KEY = 'dec357edc5b3bbc7985cbb7c1ee9fa32'
-APP_ID = 'dc9070c6'
+API_KEY = os.environ.get('SHEETY_API_KEY')
+APP_ID = os.environ.get('SHEETY_APP_ID')
 NLPEX_ENDPOINT = 'https://trackapi.nutritionix.com/v2/natural/exercise'
-SHEETY_SECRET = '529ce7c9efde4081a07dcb7b5b9da419'
+SHEETY_SECRET = os.environ.get('SHEETY_SECRET')
 SHEETY_ENDPOINT = f'https://api.sheety.co/{SHEETY_SECRET}/workoutTracking/workouts'
 GENDER = 'm'
 WEIGHT_KG = 50
 HEIGHT_CM = 180
 AGE = 17
-SHEETY_AUTH_TOKEN = 'Bearer askeio5u1093jfksajr02934qtqea'
+SHEETY_AUTH_TOKEN = os.environ.get('SHEETY_AUTH_TOKEN')
 
 
 headers = {
